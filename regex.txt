@@ -1,0 +1,13 @@
+# some regex for preprocessing the html
+# far from the best solution but workable for now
+
+</?span.*?> => '' # nuke span tags
+&nbsp; => ''
+<br /> => <br/>
+<br/>(\s*<br/>)+ => <br/> # replace 2 or more consecutive <br/> with  <br/>
+(<a ?\S*>\s*)(<br/>\s*)+ => <br/><br/>$1 # fix a rare issue
+<br/>\s*<br/>\s* => </div><div>
+<div>\s*</div> => ''
+<div ?/> => ''
+<a href=".+?"\s*/> => ''
+<a href="http://www\.gravelmag\.com/william-james\.html"\s*>\s*</a> => ''
